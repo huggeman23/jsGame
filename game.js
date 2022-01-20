@@ -1,6 +1,6 @@
 
 
-//document.getElementById("bord").innerHTML=tileMap01.mapGyid[3];
+
 tileMap01.mapGrid.forEach(mapGenerator);
 document.addEventListener('keydown',key)
 
@@ -26,13 +26,6 @@ function mapGenerator(item, index){
     }
      
 }
-function ftest(item,index) {
-    //
-    var div = document.createElement('div');
-    
-    div.innerHTML ="<p>"+index+item+"</p>";
-    document.getElementById("bord").appendChild(div);
-}
 
 function key(event){
     
@@ -43,11 +36,11 @@ function key(event){
     var yMove=0;
     let Y = player.substring(0,sep);
     let X =player.substring(sep+1);
-    //document.getElementById("11,10").className = "P";
+    
    
     switch (event.key) {
             case 'ArrowLeft': 
-            xMove = 1;             
+                xMove = 1;             
                 X = X-xMove;
                 
             break;
@@ -69,59 +62,50 @@ function key(event){
         default:
             break;
     }
-
-    var boxes=[];
+//boxes ceeps all the coardenats(id) where the blocks should move when the player moves them
+    var xBoxes=[];
+    var yBoxes=[];
     var yID=Y;
     var xID=X;
 
-    if (document.getElementById(Y+","+X).className =="B" && xMove != 0) {
+    if (document.getElementById(Y+","+X).className =="B") {
 
        while(true){                     
                
-        if(document.getElementById(Y+","+xID).className =="B"){
-         boxes.push(xID-xMove)
+        if(document.getElementById(yID+","+xID).className =="B"){
+         
+          if(xMove != 0){
+              xBoxes.push(xID-xMove)
+              xID=xID-xMove;
+
+              yBoxes.push(yID) 
+          }else{
+              yBoxes.push(yID-yMove)
+              yID=yID-yMove;
+
+              xBoxes.push(xID) 
+          }
           
-          xID=xID-xMove; 
         }else{
             break;
         }
 
        } 
-     if(document.getElementById(Y+","+(xID)).className !="W"){
-       for (let i = 0; i < boxes.length; i++) {
-        document.getElementById(Y+","+boxes[i]).className = "B";          
+     if(document.getElementById(yID+","+(xID)).className !="W"){
+
+       for (let i = 0; i < xBoxes.length; i++) {
+        document.getElementById(yBoxes[i]+","+xBoxes[i]).className = "B";          
        }
+
        document.getElementById(Y+","+X).className = "P";
        goalCheck(player);
      }
 
-        }else  if (document.getElementById(Y+","+X).className =="B" && yMove != 0) {
-  
-    
-           while(true){ 
-                        
-                   
-            if(document.getElementById(yID+","+X).className =="B"){
-             boxes.push(yID-yMove)
-              
-              yID=yID-yMove; 
-            }else{
-                break;
-            }
-    
-           } 
-         if(document.getElementById(yID+","+(X)).className !="W"){
-
-           for (let i = 0; i < boxes.length; i++) {
-            document.getElementById(boxes[i]+","+X).className = "B";          
-           }
-           document.getElementById(Y+","+X).className = "P";
-           goalCheck(player);
-         }
-    
+        
     }else if (document.getElementById(Y+","+X).className !="W" ) {
-    goalCheck(player);
- document.getElementById(Y+","+X).className = "P";
+
+        goalCheck(player);
+        document.getElementById(Y+","+X).className = "P";
  
  }
         
@@ -129,9 +113,9 @@ function key(event){
 }
 
 function  goalCheck(id) {
-    if(goalcount.includes(id)){
-            document.getElementById(id).className = "G";
-                       
+        if(goalcount.includes(id)){
+            document.getElementById(id).className = "G";   
+
         }else{
             document.getElementById(id).className = " ";
         }
@@ -140,7 +124,5 @@ function win(player) {
     
     if (goals.length==0 && goalcount.includes(player)!= true) {
         alert("you Win");
-    }
-    
-    
+    }    
 }
