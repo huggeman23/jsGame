@@ -1,0 +1,25 @@
+
+body{
+    width: 1000px;
+}
+.grid-container{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
+    width: 950px;
+    height: 800px;
+    
+}
+
+
+.W{
+    background-color: crimson;
+}
+.G{
+    background-color: darkkhaki;
+}
+.B{
+    background-color: darkorange;
+}
+.P{
+    background-color: forestgreen;
+}
