@@ -1,6 +1,7 @@
 
 body{
     width: 1000px;
+    overflow: hidden; 
 }
 .grid-container{
     display: grid;
