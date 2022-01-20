@@ -59,8 +59,6 @@ function key(event){
                 X = X-xMove;
                 
             break;   
-        default:
-            break;
     }
 //boxes ceeps all the coardenats(id) where the blocks should move when the player moves them
     var xBoxes=[];
